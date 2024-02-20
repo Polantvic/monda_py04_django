@@ -4,7 +4,7 @@ from . import models
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ['name', 'owner']
+    list_display = ['name', 'owner', 'total_tasks', 'undone_tasks', 'recent_tasks']
     list_display_links = ['name']
     list_filter = ['owner']
     search_fields = ['name']
@@ -16,7 +16,18 @@ class ProjectAdmin(admin.ModelAdmin):
             ),
         }),
     )
+
+    def total_tasks(self, obj: models.Project):
+        return obj.tasks.count()
+    total_tasks.short_description = _('total tasks')
     
+    def undone_tasks(self, obj: models.Project):
+        return obj.tasks.filter(is_done=False).count()
+    undone_tasks.short_description = _('undone tasks')
+
+    def recent_tasks(self, obj):
+        return "; ".join(obj.tasks.order_by('-created').values_list('name', flat=True)[:3])
+    recent_tasks.short_description = _('recent 3 tasks')
 
 
 class TaskAdmin(admin.ModelAdmin):
