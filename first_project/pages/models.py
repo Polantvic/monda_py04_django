@@ -12,7 +12,7 @@ class Project(models.Model):
     class Meta:
         verbose_name = _("project")
         verbose_name_plural = _("projects")
-        ordering = ["name"]
+        ordering = ["id"]
 
     def __str__(self):
         return self.name
@@ -37,7 +37,7 @@ class Task(models.Model):
     class Meta:
         verbose_name = _("task")
         verbose_name_plural = _("tasks")
-        ordering = ['is_done', '-created']
+        ordering = ['name', 'created']
 
     def __str__(self):
         return self.name
