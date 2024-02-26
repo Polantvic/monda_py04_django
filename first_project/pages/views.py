@@ -10,3 +10,7 @@ def index(request: HttpRequest) -> HttpResponse:
         'users_count': models.get_user_model().objects.count(),
     }
     return render(request, 'pages/index.html', context)
+
+def task_list(request: HttpRequest) -> HttpResponse:
+    return render(request, 'pages/task_list.html',
+                  {'task_list': models.Task.objects.all(),})
