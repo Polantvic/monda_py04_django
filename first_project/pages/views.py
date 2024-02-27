@@ -1,5 +1,5 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from . import models
 
 
@@ -14,3 +14,7 @@ def index(request: HttpRequest) -> HttpResponse:
 def task_list(request: HttpRequest) -> HttpResponse:
     return render(request, 'pages/task_list.html',
                   {'task_list': models.Task.objects.all(),})
+
+def task_detail(request: HttpRequest, pk:int) -> HttpResponse:
+    return render(request, 'pages/task_detail.html',
+                  {'task': get_object_or_404(models.Task, pk=pk),})

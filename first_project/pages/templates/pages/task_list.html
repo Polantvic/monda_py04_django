@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ block.super }} Tasks{% endblock title %}
+{% block content %}
+<h1>Tasks</h1>
+<ul>
+{% for task in task_list %}
+<li>
+    {% if task.is_done %}&#x2611;{% else %}&#x2610;{% endif %}
+    <a href="{% url "task_detail" task.pk %}">{{ task }}</a>
+    <span style="float:right;">{{ task.deadline }}</span>
+</li>
+{% empty %}
+<li>No Task Found</li>
+{% endfor %}
+</ul>
+{% endblock content %}
