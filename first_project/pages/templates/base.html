@@ -1,14 +1,15 @@
-<!DOCTYPE html>
+<!DOCTYPE html>{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}First Project{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <header>
         <span class="logo">First Project</span>
-        <ul>
+        <ul class="nav">
             <li><a href="{% url 'index' %}">Dashboard</a></li>
             <li><a href="{% url 'task_list' %}">Tasks</a></li>
         </ul>
@@ -19,5 +20,11 @@
         {% endfor %}
     </section>
     <main>{% block content %}{% endblock content %}</main>
+    <footer>
+        {% block footer %}{% endblock footer %}
+        <p>&copy; 2023-2024 
+            <a style="float:right;" href="http://gka.lt" target="_blank">Gero Kodo Akademija</a>
+        </p>
+    </footer>
 </body>
 </html>
